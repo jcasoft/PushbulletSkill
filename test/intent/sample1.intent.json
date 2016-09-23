@@ -1,0 +1,10 @@
+{
+    "utterance": "push JuanCarlos barcelona is the best soccer team of the world stop",
+    "intent_type": "pushmessage_intent",
+    "intent": {
+        "PushMessageKeyword": "push chat",
+        "Contact": "JuanCarlos"
+	"Message": "barcelona is the best soccer team of the world"
+	"Finish" : "stop"
+    }
+}

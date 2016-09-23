@@ -1,0 +1,7 @@
+{
+    "utterance": "photo",
+    "intent_type": "pushphoto_intent",
+    "intent": {
+        "PushPhotoStartKeyword": "photo picture"
+    }
+}
