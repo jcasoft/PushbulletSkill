@@ -13,17 +13,17 @@ Prerequisites
 -------------
 You must have installed:
 >-**OpenCV** You can use this [link](http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/)  as a reference or search other
-> - Python **PIL** , for install :  pip install Pillow 
+> - Python **PIL** , for install :  `pip install Pillow` 
 
 Download pushbullet.py-0.10.0.tar.gz from link listed bellow **above**
 
 > **Note:**
 
 > - You have to install pushbullet inside Mycroft virtual environment, for that do the following, download pushbullet
-> 
- tar -xvzf pushbullet.py-0.10.0.tar.gz
->  cd pushbullet.py-0.10.0
->  sudo /home/pi/.virtualenvs/mycroft/local/bin/python setup install
+
+     tar -xvzf pushbullet.py-0.10.0.tar.gz
+     cd pushbullet.py-0.10.0
+     sudo /home/pi/.virtualenvs/mycroft/local/bin/python setup install
 
 - Create your account on  [pushbullet.com](https://www.pushbullet.com/) to get your [Access Token](https://www.pushbullet.com/#settings)
 - Install pushbullet on your phone 
@@ -40,22 +40,30 @@ Installation
 -------------------
 **Clone PushbulletSkill repository** on third party skill directory
 
-cd  /opt/mycroft/third_party/
-git clone  https://github.com/jcasoft/PushbulletSkill.git
+    cd  /opt/mycroft/third_party/
+
+    git clone  https://github.com/jcasoft/PushbulletSkill.git
 
 <i class="icon-cog"></i>Add 'PushbulletSkill' section in your Mycroft configuration file on: 
 
 /home/pi/.mycroft/mycroft.ini
 
-[PushbulletSkill]
-api_key = "o.XXXXXXXXXX"  # <-- Replace with your Access token
-photo = "/opt/mycroft/third_party/mycroft-pushbullet-skill/script/photo.py"
-photo_img = "/tmp/photo.png"
+    [PushbulletSkill]
+    api_key = "o.XXXXXXXXXX"  # <-- Replace with your Access token
+    
+    photo = "/opt/mycroft/third_party/mycroft-pushbullet-skill/script/photo.py"
+    
+    photo_img = "/tmp/photo.png"
+
 > **Note:**
 
 > - If use a different **third party skill directory** you have to change on [PushbulletSkill] section on /home/pi/.mycroft/mycroft.ini 
 > and line 39 on 
-> /opt/mycroft/third_party/mycroft-pushbullet-skill/script/photo.py
+> `/opt/mycroft/third_party/mycroft-pushbullet-skill/script/photo.py`
+
+Restart Skills
+
+    ./start.sh skills
 
 
 ----------
