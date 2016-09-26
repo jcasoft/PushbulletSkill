@@ -12,10 +12,10 @@ This uses  [pushbullet.py](https://pypi.python.org/packages/7d/a8/7fbed382824e84
 Prerequisites
 -------------
 You must have installed:
->-**OpenCV** You can use this [link](http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/)  as a reference or search other
+> - **OpenCV** You can use this [link](http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/)  as a reference or search other
 > - Python **PIL** , for install :  `pip install Pillow` 
 
-Download pushbullet.py-0.10.0.tar.gz from link listed bellow **above**
+Download pushbullet.py-0.10.0.tar.gz from link listed  **above**
 
 > **Note:**
 
