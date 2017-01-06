@@ -31,8 +31,10 @@ Download pushbullet.py-0.10.0.tar.gz from link listed  **above**
      cd pushbullet.py-0.10.0
 
 > - Now install pushbullet inside Mycroft virtual environment, for that do the following
+
      workon mycroft
      python setup.py install
+
 
 - Create your account on  [pushbullet.com](https://www.pushbullet.com/) to get your [Access Token](https://www.pushbullet.com/#settings)
 - Install pushbullet on your phone 
