@@ -58,7 +58,8 @@ Installation
     $HOME/.mycroft/mycroft.conf
 
 	"PushbulletSkill": {
-		"api_key": "o.XXXXXXXXXX"  # <-- Replace with your Access token,
+		"api_key": "o.XXXXXXXXXX",  	# <-- Replace with your Access token,
+		"plughw": 0  			# <-- Audio Output index device 
 	}
 
 
@@ -96,7 +97,7 @@ Currently this skill can do the following things (with some variation):
 
 > **Note:**
 > - help - to invoke a push 10 seconds audio file to your own pushbullet account
-> - The audio file is sent to your devices associated to you pushbullet account
+> - The audio file is sent to your devices associated to your pushbullet account
 
 
 **Enjoy !**

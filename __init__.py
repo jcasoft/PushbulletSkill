@@ -32,6 +32,7 @@ class PushbulletSkill(MycroftSkill):
         super(PushbulletSkill, self).__init__(name="PushbulletSkill")
 
         self.api_key = self.config.get('api_key')
+	self.plughw = self.config.get('plughw')
 	self.contact = ''
 	self.chat = ''
 
@@ -162,7 +163,7 @@ class PushbulletSkill(MycroftSkill):
 
 	time.sleep(1)
 	with open(self.photo_img,"rb") as png:
-	    file_data = self.pb.upload_file(png, "Photo from Mycroft")
+	    file_data = self.pb.upload_file(png, "photo.png")
         chat = self.chat
   	push = self.pb.push_file(**file_data)
 
@@ -170,13 +171,13 @@ class PushbulletSkill(MycroftSkill):
 	self.speak_dialog("push.help")
 	time.sleep(6)
 	play_wav("ding.wav")
-	audio_cmd = "arecord -r 16000 -c 2 -d 10 -D plughw:0 " + self.help_audio+".wav"
+	audio_cmd = "arecord -r 16000 -c 2 -d 10 -D plughw:"+str(self.plughw) + " " + self.help_audio+".wav"
 	os.system(audio_cmd)
 	play_wav("dong.wav")
 	audio_cmd = "lame " + self.help_audio+".wav " + self.help_audio+".mp3"
 	os.system(audio_cmd)
 	with open(self.help_audio+".mp3","rb") as mp3:
-	    file_data = self.pb.upload_file(mp3, "***Help: Audio Message from Mycroft***")
+	    file_data = self.pb.upload_file(mp3, "help_audio_file.mp3")
 	chat = self.pb.devices
   	push = self.pb.push_file(**file_data)
 	self.speak_dialog("push.help.send")
