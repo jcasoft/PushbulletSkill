@@ -10,12 +10,15 @@ This uses  [pushbullet.py](https://pypi.python.org/packages/7d/a8/7fbed382824e84
 
 ----------
 
-Prerequisites
+Prerequisites for Photo feature
 -------------
-You must have installed:
+You must have installed this only if use a photo feature:
 > - **OpenCV** You can use this [link](http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/)  as a reference or search other
 > - Python **PIL** , for install :  `pip install Pillow` 
 
+
+Prerequisites for Pushbullet
+-------------
 Download pushbullet.py-0.10.0.tar.gz from link listed  **above**
 
 > **Note:**
