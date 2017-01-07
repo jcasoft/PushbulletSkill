@@ -40,7 +40,6 @@ class PushbulletSkill(MycroftSkill):
 	self.photo_img = "/tmp/photo.png"
 	self.help_audio = "/tmp/help"
 
-
 	"""
 	Register Mycroft device to Pushbullet
 	"""
@@ -167,7 +166,11 @@ class PushbulletSkill(MycroftSkill):
         chat = self.chat
   	push = self.pb.push_file(**file_data)
 
+
     def	handle_help(self, message):
+	"""
+	Record 10 seconds to help_audio_file.mp3 file
+    	"""
 	self.speak_dialog("push.help")
 	time.sleep(6)
 	play_wav("ding.wav")
