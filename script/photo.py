@@ -15,28 +15,36 @@ from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
 
+import inspect
+
  
 def get_image():
 	retval, im = camera.read()
 	return im
 
 
+path_to_file = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
 camera_port = 0
-aplay_device = "plughw:1,0"
+#aplay_device = "plughw:1,0"
 
 ramp_frames = 1
 camera = cv2.VideoCapture(camera_port)
 
-ws = create_connection("ws://localhost:8000/events/ws")
-ws.send('{"message_type": "speak", "context": null, "metadata": {"utterance": "Say cheezzzzz"}}')
+SOUND_EFFECT = path_to_file + '/camera-shutter-click-01.wav'
+
+ws = create_connection("ws://localhost:8181/core")
+
+msg = 'Say cheez!'
+ws.send('{"type": "speak", "data": {"utterance": "'+ msg +'"}, "context": null}')
 
 # You can change this time, depend your TTS respond
-time.sleep(2)
+time.sleep(4)
 
 for i in xrange(ramp_frames):
 	temp = get_image()
 
-os.system('aplay -D '+ aplay_device +' /opt/mycroft/third_party/mycroft-pushbullet-skill/script/camera-shutter-click-01.wav')
+os.system('aplay ' +  SOUND_EFFECT)
 
 camera_capture = get_image()
 
@@ -55,7 +63,9 @@ photo_out = '/tmp/photo.png'
 img.save(photo_out)
 
 
-ws.send('{"message_type": "speak", "context": null, "metadata": {"utterance": "The picture is ready, and will be sent to your pushbullet account"}}')
+msg = "The picture is ready, and will be sent to your pushbullet account!"
+ws.send('{"type": "speak", "data": {"isDialog": null, "utterance": "'+ msg +'"}, "context": null}')
+
 result = ws.recv()
 ws.close()
 del(camera)

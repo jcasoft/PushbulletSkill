@@ -1,0 +1,25 @@
+{
+  "identifier": "PushbulletSkill",
+  "name": "PushbulletSkill",
+  "skillMetadata": {
+      "sections": [
+          {
+              "name": "Pushbullet Skill Parameters",
+              "fields": [
+                  {
+                      "type": "label",
+                      "label": "You must get your API KEY from  <a href='https://www.pushbullet.com/signin?next=%2F' target='_blank'>Pushbullet</a><p/>",
+                      "value": ""
+                  },
+                  {
+                      "name": "api_key",
+                      "type": "text",
+                      "label": "API Key",
+                      "value": "",
+                      "placeholder": "o.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+		  }
+              ]
+          }
+      ]
+  }
+}

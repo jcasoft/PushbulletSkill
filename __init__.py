@@ -13,7 +13,9 @@ from mycroft.skills.core import MycroftSkill
 from mycroft.util.log import getLogger
 
 from pushbullet import Pushbullet
-#from websocket import create_connection
+import subprocess
+import inspect
+
 
 
 __author__ = 'jcasoft'
@@ -21,6 +23,9 @@ __author__ = 'jcasoft'
 
 LOGGER = getLogger(__name__)
  
+path_to_file = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
+
 
 class PushbulletSkill(MycroftSkill):
     """
@@ -31,12 +36,30 @@ class PushbulletSkill(MycroftSkill):
     def __init__(self):
         super(PushbulletSkill, self).__init__(name="PushbulletSkill")
 
-        self.api_key = self.config.get('api_key')
-	self.plughw = self.config.get('plughw')
-	self.contact = ''
-	self.chat = ''
+	self.audio_effects = "/opt/mycroft/skills/PushbulletSkill/"
+	self.enable_fallback = False
+        self._setup()
+        try:
+            self.settings.set_changed_callback(self._force_setup)
+        except BaseException:
+            LOGGER.debug(
+                'No auto-update on changed settings (Outdated version)')
 
-	self.photo_script = expanduser("~")+"/.mycroft/skills/PushbulletSkill/script/photo.py"
+        try:
+            self.settings.set_changed_callback(self._force_setup)
+        except BaseException:
+            LOGGER.debug(
+                'No auto-update on changed settings (Outdated version)')
+
+
+
+
+    def _setup(self, force=False):
+        if self.settings is not None:
+             self.api_key = self.settings.get('api_key')
+            
+
+	self.photo_script = "/opt/mycroft/skills/PushbulletSkill/script/photo.py"
 	self.photo_img = "/tmp/photo.png"
 	self.help_audio = "/tmp/help"
 
@@ -163,7 +186,7 @@ class PushbulletSkill(MycroftSkill):
 	time.sleep(1)
 	with open(self.photo_img,"rb") as png:
 	    file_data = self.pb.upload_file(png, "photo.png")
-        chat = self.chat
+        #chat = self.chat
   	push = self.pb.push_file(**file_data)
 
 
@@ -172,15 +195,19 @@ class PushbulletSkill(MycroftSkill):
 	Record 10 seconds to help_audio_file.mp3 file
     	"""
 	self.speak_dialog("push.help")
-	time.sleep(6)
-	play_wav("ding.wav")
-	audio_cmd = "arecord -r 16000 -c 2 -d 10 -D plughw:"+str(self.plughw) + " " + self.help_audio+".wav"
-	os.system(audio_cmd)
-	play_wav("dong.wav")
-	audio_cmd = "lame " + self.help_audio+".wav " + self.help_audio+".mp3"
-	os.system(audio_cmd)
-	with open(self.help_audio+".mp3","rb") as mp3:
-	    file_data = self.pb.upload_file(mp3, "help_audio_file.mp3")
+	time.sleep(7)
+	p = play_wav(self.audio_effects+"ding.wav")
+	p.communicate()
+
+
+	r = record(self.help_audio+".wav",10,16000,1)
+	r.communicate()
+
+	p = play_wav(self.audio_effects+"dong.wav")
+	p.communicate()
+
+	with open(self.help_audio+".wav","rb") as mp3:
+	    file_data = self.pb.upload_file(mp3, "help_audio_file.wav")
 	chat = self.pb.devices
   	push = self.pb.push_file(**file_data)
 	self.speak_dialog("push.help.send")

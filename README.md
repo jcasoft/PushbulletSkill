@@ -1,75 +1,59 @@
 **PushbulletSkill**
 ===================
 
-For Mycroft with new API (https://home.mycroft.ai) 
 An skill to use with Mycroft that allows you to send messages, 10 seconds audio file and photos using **Pushbullet**
-New features: message to self account and help audio file to devices
-
-This uses  [pushbullet.py](https://pypi.python.org/packages/7d/a8/7fbed382824e84a51dfdc13315d9171fb6dc0670803ccb400931b9e3465b/pushbullet.py-0.10.0.tar.gz#md5=24db6917a12e1c9b3fecca102615376b)
 
 
-----------
 
-Prerequisites for Photo feature
--------------
-You must have installed this only if use a photo feature:
-> - **OpenCV** You can use this [link](http://www.pyimagesearch.com/2015/02/23/install-opencv-and-python-on-your-raspberry-pi-2-and-b/)  as a reference or search other
-> - Python **PIL** , for install :  `pip install Pillow` 
 
 
 Prerequisites for Pushbullet
 -------------
-Download pushbullet.py-0.10.0.tar.gz from link listed  **above**
-
-> **Note:**
-
-> - Install audio convert tool
-
-     sudo apt-get install lame
-
-
-> - Download pushbullet
-
-     tar -xvzf pushbullet.py-0.10.0.tar.gz
-     cd pushbullet.py-0.10.0
-
-> - Now install pushbullet inside Mycroft virtual environment, for that do the following
-
-     workon mycroft
-     python setup.py install
-
-
-- Create your account on  [pushbullet.com](https://www.pushbullet.com/) to get your [Access Token](https://www.pushbullet.com/#settings)
+- Create your account on  [pushbullet.com](https://www.pushbullet.com/) to get your [API](https://www.pushbullet.com/signin?next=%2F) 
 - Install pushbullet on your phone 
 - Make some contacts
 
-
+**Conect your USB Camera to Mycroft installation (Mark1, Desktop, Picroft)**
 
 ----------
 
 
-Installation
+
+Install Methon on Mark1 and other devices
+-------------------
+    install push bullet
+
+
+
+Install Using MSM (Mycroft Skill Manager)
+-------------------
+
+    msm install https://github.com/jcasoft/PushbulletSkill.git
+
+
+
+Manual Method not for Mark1
 -------------------
 **Clone PushbulletSkill repository** on third party skill directory
 
-    cd  $HOME/.mycroft/skills
-
+    cd  /opt/mycroft/skills
     git clone  https://github.com/jcasoft/PushbulletSkill.git
+    cd PushbulletSkill
+    workon mycroft (Only if you have installed Mycroft on Virtualenv)
+    sudo apt-get install lame libopencv-dev python-opencv
+    sudo pip install -r requirements.txt
 
-<i class="icon-cog"></i>Add 'PushbulletSkill' section in your Mycroft configuration file on: 
 
-    $HOME/.mycroft/mycroft.conf
 
-	"PushbulletSkill": {
-		"api_key": "o.XXXXXXXXXX",  	# <-- Replace with your Access token,
-		"plughw": 0  			# <-- Audio Output index device 
-	}
+Authorization:
+-------------------
+Visit the  [Skill settings for Pushbullet ](https://home.mycroft.ai/#/skill) and enter the API get on **Prerequisites for Pushbullet**
+
 
 
 
 Restart Skills
 
-    ./start.sh skills
 
 
 ----------
